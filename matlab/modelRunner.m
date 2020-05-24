@@ -13,6 +13,7 @@
 % 
 %     You should have received a copy of the GNU General Public License
 %     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 function [ time, X, parameters ] = modelRunner( X0, options, parameters, beats, ignoreFirst)
 % A function for simulating models with various parameters. It serves as
 % the interface between user's scripts (defining parameters) and simulation

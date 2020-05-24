@@ -1,26 +1,9 @@
-%     Cardiac model ToR-ORd
-%     Copyright (C) 2019 Jakub Tomek. Contact: jakub.tomek.mff@gmail.com
-% 
-%     This program is free software: you can redistribute it and/or modify
-%     it under the terms of the GNU General Public License as published by
-%     the Free Software Foundation, either version 3 of the License, or
-%     (at your option) any later version.
-% 
-%     This program is distributed in the hope that it will be useful,
-%     but WITHOUT ANY WARRANTY; without even the implied warranty of
-%     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%     GNU General Public License for more details.
-% 
-%     You should have received a copy of the GNU General Public License
-%     along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
-%% A script showing how two different models can be easily compared. Here,
+% A script showing how two different models can be easily compared. Here,
 % we plot control ToR-ORd and the HCM variant in control condition and with
 % 50% IKr block
+%
 % Slow pacing (0.25 Hz) is used to facilitate EADs. 
-
-% Setting parameters
+%% Setting parameters
 clear 
 % param is the default model parametrization here
 param.bcl = 4000;

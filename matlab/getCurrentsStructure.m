@@ -13,6 +13,7 @@
 % 
 %     You should have received a copy of the GNU General Public License
 %     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 function currents = getCurrentsStructure(time, X, parameters, ignoreFirstSpikes)
 % A function which computes currents and extract other key state variables,
 % collecting these in an output structure.

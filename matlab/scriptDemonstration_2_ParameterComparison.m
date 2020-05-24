@@ -1,26 +1,8 @@
-%     Cardiac model ToR-ORd
-%     Copyright (C) 2019 Jakub Tomek. Contact: jakub.tomek.mff@gmail.com
-% 
-%     This program is free software: you can redistribute it and/or modify
-%     it under the terms of the GNU General Public License as published by
-%     the Free Software Foundation, either version 3 of the License, or
-%     (at your option) any later version.
-% 
-%     This program is distributed in the hope that it will be useful,
-%     but WITHOUT ANY WARRANTY; without even the implied warranty of
-%     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-%     GNU General Public License for more details.
-% 
-%     You should have received a copy of the GNU General Public License
-%     along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
-%% A script showing a common-case use of the model's functions when multiple
+% A script showing a common-case use of the model's functions when multiple
 % simulations are to be run. In this case, we plot simulation outputs for 5
 % different multipliers of IKr (corresponding to 80, 90, 100, 110, and 120
 % percent availability).
-
-% Setting parameters
+%% Setting parameters
 clear 
 % param is the default model parametrization here
 param.bcl = 1000;
