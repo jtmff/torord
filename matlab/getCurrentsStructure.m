@@ -54,7 +54,7 @@ ko = 5;if (isfield(parameters,'ko')) ko = parameters.ko; end
 
 % Localization of ICaL and NCX: the fraction in junctional subspace
 ICaL_fractionSS = 0.8; if (isfield(parameters, 'ICaL_fractionSS')) ICaL_fractionSS = parameters.ICaL_fractionSS; end
-INaCa_fractionSS = 0.24; if (isfield(parameters, 'INaCa_fractionSS')) INaCa_fractionSS = parameters.INaCa_fractionSS; end
+INaCa_fractionSS = 0.35; if (isfield(parameters, 'INaCa_fractionSS')) INaCa_fractionSS = parameters.INaCa_fractionSS; end
 
 % Current multipliers
 INa_Multiplier = 1; if (isfield(parameters,'INa_Multiplier')) INa_Multiplier = parameters.INa_Multiplier; end
