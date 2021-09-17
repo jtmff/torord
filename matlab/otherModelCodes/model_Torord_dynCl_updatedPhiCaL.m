@@ -17,7 +17,7 @@
 %
 function output=model_Torord_dynCl_updatedPhiCaL(t,X,flag_ode, cellType, ICaL_Multiplier, ...
         INa_Multiplier, Ito_Multiplier, INaL_Multiplier, IKr_Multiplier, IKs_Multiplier, IK1_Multiplier, IKb_Multiplier,INaCa_Multiplier,...
-        INaK_Multiplier, INab_Multiplier, ICab_Multiplier, IpCa_Multiplier, IClCa_Multiplier, IClb_Multiplier, Jrel_Multiplier,Jup_Multiplier,nao,cao,ko,ICaL_fractionSS,INaCa_fractionSS, stimAmp, stimDur, vcParameters, apClamp, extraParams)
+        INaK_Multiplier, INab_Multiplier, ICab_Multiplier, IpCa_Multiplier, ICaCl_Multiplier, IClb_Multiplier, Jrel_Multiplier,Jup_Multiplier,nao,cao,ko,ICaL_fractionSS,INaCa_fractionSS, stimAmp, stimDur, vcParameters, apClamp, extraParams)
 
 celltype=cellType; %endo = 0, epi = 1, mid = 2
 
@@ -184,7 +184,7 @@ GpCa=5e-04*IpCa_Multiplier;
 IpCa=GpCa*cai/(0.0005+cai);
 
 %% Chloride
-% I_ClCa: Ca-activated Cl Current, I_Clbk: background Cl Current
+% I_CaCl: Ca-activated Cl Current, I_Clbk: background Cl Current
 
 ecl = (R*T/F)*log(cli/clo);            % [mV]
 eclss = (R*T/F)*log(clss/clo);            % [mV]
@@ -192,14 +192,14 @@ eclss = (R*T/F)*log(clss/clo);            % [mV]
 Fjunc = 1;   Fsl = 1-Fjunc; % fraction in SS and in myoplasm - as per literature, I(Ca)Cl is in junctional subspace
 
 Fsl = 1-Fjunc; % fraction in SS and in myoplasm
-GClCa = IClCa_Multiplier * 0.2843;   % [mS/uF]
+GClCa = ICaCl_Multiplier * 0.2843;   % [mS/uF]
 GClB = IClb_Multiplier * 1.98e-3;        % [mS/uF] %
 KdClCa = 0.1;    % [mM]
 
-I_ClCa_junc = Fjunc*GClCa/(1+KdClCa/cass)*(v-eclss);
-I_ClCa_sl = Fsl*GClCa/(1+KdClCa/cai)*(v-ecl);
+I_CaCl_junc = Fjunc*GClCa/(1+KdClCa/cass)*(v-eclss);
+I_CaCl_sl = Fsl*GClCa/(1+KdClCa/cai)*(v-ecl);
 
-I_ClCa = I_ClCa_junc+I_ClCa_sl;
+I_CaCl = I_CaCl_junc+I_CaCl_sl;
 I_Clbk = GClB*(v-ecl);
 
 %% Calcium handling
@@ -231,7 +231,7 @@ end
 
 %update the membrane voltage
 
-dv=-(INa+INaL+Ito+ICaL+ICaNa+ICaK+IKr+IKs+IK1+INaCa_i+INaCa_ss+INaK+INab+IKb+IpCa+ICab+I_ClCa+I_Clbk+Istim);
+dv=-(INa+INaL+Ito+ICaL+ICaNa+ICaK+IKr+IKs+IK1+INaCa_i+INaCa_ss+INaK+INab+IKb+IpCa+ICab+I_CaCl+I_Clbk+Istim);
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -273,8 +273,8 @@ dcai=Bcai*(-(ICaL_i + IpCa+ICab-2.0*INaCa_i)*Acap/(2.0*F*vmyo)-Jup*vnsr/vmyo+Jdi
 Bcass=1.0/(1.0+BSRmax*KmBSR/(KmBSR+cass)^2.0+BSLmax*KmBSL/(KmBSL+cass)^2.0);
 dcass=Bcass*(-(ICaL_ss-2.0*INaCa_ss)*Acap/(2.0*F*vss)+Jrel*vjsr/vss-Jdiff);
 
-dcli = - (I_Clbk + I_ClCa_sl)*Acap/(-1*F*vmyo)+JdiffCl*vss/vmyo;
-dclss = - I_ClCa_junc*Acap/(-1*F*vss)-JdiffCl;
+dcli = - (I_Clbk + I_CaCl_sl)*Acap/(-1*F*vmyo)+JdiffCl*vss/vmyo;
+dclss = - I_CaCl_junc*Acap/(-1*F*vss)-JdiffCl;
 
 
 
@@ -294,7 +294,7 @@ if flag_ode==1
         dt_ikr_c0 dt_ikr_c1 dt_ikr_c2 dt_ikr_o dt_ikr_i dJrel_p dcli dclss]';
 else
     output=[INa INaL Ito ICaL IKr IKs IK1 INaCa_i INaCa_ss INaK  IKb INab ICab IpCa Jdiff JdiffNa JdiffK Jup Jleak Jtr Jrel CaMKa Istim, fINap, ...
-        fINaLp, fICaLp, fJrelp, fJupp, cajsr, cansr, PhiCaL_ss, v, ICaL_i, I_ClCa, I_Clbk, ICaL_tot];
+        fINaLp, fICaLp, fJrelp, fJupp, cajsr, cansr, PhiCaL_ss, v, ICaL_i, I_CaCl, I_Clbk, ICaL_tot];
 end
 
 end

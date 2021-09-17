@@ -184,7 +184,7 @@ GpCa=5e-04*IpCa_Multiplier;
 IpCa=GpCa*cai/(0.0005+cai);
 
 %% Chloride
-% I_ClCa: Ca-activated Cl Current, I_Clbk: background Cl Current
+% I_(CaCl): Ca-activated Cl Current, I_Clbk: background Cl Current
 
 ecl = (R*T/F)*log(cli/clo);            % [mV]
 
@@ -195,10 +195,10 @@ GClCa = ICaCl_Multiplier * 0.2843;   % [mS/uF]
 GClB = IClb_Multiplier * 1.98e-3;        % [mS/uF] %
 KdClCa = 0.1;    % [mM]
 
-I_ClCa_junc = Fjunc*GClCa/(1+KdClCa/cass)*(v-ecl);
-I_ClCa_sl = Fsl*GClCa/(1+KdClCa/cai)*(v-ecl);
+I_CaCl_junc = Fjunc*GClCa/(1+KdClCa/cass)*(v-ecl);
+I_CaCl_sl = Fsl*GClCa/(1+KdClCa/cai)*(v-ecl);
 
-I_ClCa = I_ClCa_junc+I_ClCa_sl;
+I_CaCl = I_CaCl_junc+I_CaCl_sl;
 I_Clbk = GClB*(v-ecl);
 
 %% Calcium handling
@@ -232,7 +232,7 @@ end
 
 %update the membrane voltage
 
-dv=-(INa+INaL+Ito+ICaL+ICaNa+ICaK+IKr+IKs+IK1+INaCa_i+INaCa_ss+INaK+INab+IKb+IpCa+ICab+I_ClCa+I_Clbk+Istim);
+dv=-(INa+INaL+Ito+ICaL+ICaNa+ICaK+IKr+IKs+IK1+INaCa_i+INaCa_ss+INaK+INab+IKb+IpCa+ICab+I_CaCl+I_Clbk+Istim);
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -288,7 +288,7 @@ if flag_ode==1
         dt_ikr_c0 dt_ikr_c1 dt_ikr_c2 dt_ikr_o dt_ikr_i dJrel_p]';
 else
     output=[INa INaL Ito ICaL IKr IKs IK1 INaCa_i INaCa_ss INaK  IKb INab ICab IpCa Jdiff JdiffNa JdiffK Jup Jleak Jtr Jrel CaMKa Istim, fINap, ...
-        fINaLp, fICaLp, fJrelp, fJupp, cajsr, cansr, PhiCaL_ss, v, ICaL_i, I_ClCa, I_Clbk, ICaL_tot];
+        fINaLp, fICaLp, fJrelp, fJupp, cajsr, cansr, PhiCaL_ss, v, ICaL_i, I_CaCl, I_Clbk, ICaL_tot];
 end
 
 end

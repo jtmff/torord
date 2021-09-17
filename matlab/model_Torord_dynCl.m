@@ -16,7 +16,7 @@
 
 function output=model_Torord_dynCl(t,X,flag_ode, cellType, ICaL_Multiplier, ...
         INa_Multiplier, Ito_Multiplier, INaL_Multiplier, IKr_Multiplier, IKs_Multiplier, IK1_Multiplier, IKb_Multiplier,INaCa_Multiplier,...
-        INaK_Multiplier, INab_Multiplier, ICab_Multiplier, IpCa_Multiplier, IClCa_Multiplier, IClb_Multiplier, Jrel_Multiplier,Jup_Multiplier,nao,cao,ko,ICaL_fractionSS,INaCa_fractionSS, stimAmp, stimDur, vcParameters, apClamp, extraParams)
+        INaK_Multiplier, INab_Multiplier, ICab_Multiplier, IpCa_Multiplier, ICaCl_Multiplier, IClb_Multiplier, Jrel_Multiplier,Jup_Multiplier,nao,cao,ko,ICaL_fractionSS,INaCa_fractionSS, stimAmp, stimDur, vcParameters, apClamp, extraParams)
 
 celltype=cellType; %endo = 0, epi = 1, mid = 2
 
@@ -191,7 +191,7 @@ eclss = (R*T/F)*log(clss/clo);            % [mV]
 Fjunc = 1;   Fsl = 1-Fjunc; % fraction in SS and in myoplasm - as per literature, I(Ca)Cl is in junctional subspace
 
 Fsl = 1-Fjunc; % fraction in SS and in myoplasm
-GClCa = IClCa_Multiplier * 0.2843;   % [mS/uF]
+GClCa = ICaCl_Multiplier * 0.2843;   % [mS/uF]
 GClB = IClb_Multiplier * 1.98e-3;        % [mS/uF] %
 KdClCa = 0.1;    % [mM]
 

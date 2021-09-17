@@ -135,7 +135,7 @@ currents.caLeavingNCX = zeros(nPoints, 1);
 currents.caLeavingJup = zeros(nPoints, 1);
 currents.caLeavingPCa = zeros(nPoints, 1);
 currents.IClbk = zeros(nPoints, 1);
-currents.IClCa = zeros(nPoints, 1);
+currents.ICaCl = zeros(nPoints, 1);
 
 i = 1;
 
@@ -190,7 +190,7 @@ for iBeat = 1:size(time, 1)
         currents.PhiCaL_ss(i) = IsJs(31);     
         currents.V(i) = IsJs(32); %  This may be usually obtained directly from vector of state variables, but not necessarily when clamping is used, so it can be also extracted separately.
         currents.ICaL_i(i) = IsJs(33);
-        currents.IClCa(i) = IsJs(34);
+        currents.ICaCl(i) = IsJs(34);
         currents.IClbk(i) = IsJs(35);
         currents.ICaL_tot(i) = IsJs(36);
     
